@@ -1,6 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors=require('cors')
+const dotenv=require('dotenv')
+dotenv.config()
 
 const router = require("./routes/user-routes");
 const blogRouter = require("./routes/blog-routes");
@@ -18,7 +20,7 @@ app.use("/api/blog",blogRouter)
 
 mongoose
     .connect(
-        "mongodb+srv://admin:q49TE9T3Cv1RsuxB@cluster0.ovcwk0i.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+        `mongodb+srv://admin:${process.env.MONGODB_PASSWORD}@cluster0.ovcwk0i.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
     )
     .then(() => app.listen(5000))
     .then(() => console.log("Connected to Database and listening to localhost 5000 "))
